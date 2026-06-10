@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline - RecipeVerse</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #fff8ee;
+        color: #431407;
+        text-align: center;
+        padding: 20px;
+      }
+      .offline-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        color: #f97316;
+      }
+      h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-family: "Nunito", sans-serif;
+        font-size: 1.2rem;
+        color: #9a3412;
+        margin-bottom: 2rem;
+      }
+      .btn {
+        background: linear-gradient(135deg, #f97316, #ef4444);
+        color: white;
+        padding: 14px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.3s;
+        box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.3);
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="offline-icon">📡</div>
+    <h1>You're Offline</h1>
+    <p>Don't worry! You can still access your saved recipes and meal plans.</p>
+    <a href="/" class="btn">Return to My Kitchen</a>
+  </body>
+</html>

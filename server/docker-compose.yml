@@ -1,0 +1,17 @@
+name: "mad_el_rvce_sem2_recipe_verse"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: recipe_verse
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: recipeverse
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

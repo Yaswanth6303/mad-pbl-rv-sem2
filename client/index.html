@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeVerse - Smart Food Recipe Explorer</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#F97316" />
+    <link rel="apple-touch-icon" href="/assets/icons/logo_192.png" />
+
+    <!-- External Libraries -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="/css/animations.css" />
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div
+      id="splash-screen"
+      style="
+        position: fixed;
+        inset: 0;
+        background: #fff8ee;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s;
+      "
+    >
+      <div style="text-align: center">
+        <img
+          src="/assets/icons/logo_512.png"
+          width="120"
+          class="btn-pulse"
+          alt="RecipeVerse"
+        />
+        <h1
+          style="
+            color: #f97316;
+            margin-top: 20px;
+            font-family: &quot;Poppins&quot;;
+          "
+        >
+          RecipeVerse
+        </h1>
+      </div>
+    </div>
+
+    <!-- Global Loader -->
+    <div
+      id="global-loader"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding: 15px;
+        z-index: 2000;
+      "
+    >
+      <div
+        class="skeleton"
+        style="width: 40px; height: 40px; border-radius: 50%"
+      ></div>
+    </div>
+
+    <div id="app">
+      <nav>
+        <div class="container nav-content">
+          <a
+            href="/"
+            class="logo"
+            onclick="
+              event.preventDefault();
+              App.navigate('/');
+            "
+          >
+            <span>RecipeVerse</span>
+          </a>
+          <ul class="nav-links">
+            <li>
+              <a
+                href="/"
+                onclick="
+                  event.preventDefault();
+                  App.navigate('/');
+                "
+                >🏠 <span>Home</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="/explore"
+                onclick="
+                  event.preventDefault();
+                  App.navigate('/explore');
+                "
+                >🌍 <span>Explore</span></a
+              >
+            </li>
+            <li id="nav-favorites" style="display: none;">
+              <a
+                href="/favorites"
+                onclick="
+                  event.preventDefault();
+                  App.navigate('/favorites');
+                "
+                >❤️ <span>Favorites</span></a
+              >
+            </li>
+            <li id="nav-planner" style="display: none;">
+              <a
+                href="/planner"
+                onclick="
+                  event.preventDefault();
+                  App.navigate('/planner');
+                "
+                >📅 <span>Planner</span></a
+              >
+            </li>
+          </ul>
+          <div id="auth-action">
+            <!-- Dynamic Auth Button -->
+          </div>
+        </div>
+      </nav>
+
+      <main id="main-content">
+        <!-- Dynamic Content Injected Here -->
+      </main>
+
+      <footer class="container">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+          "
+        >
+          <p>&copy; 2024 RecipeVerse. MCA Academic Project.</p>
+          <div style="display: flex; gap: 15px">
+            <button
+              id="install-btn"
+              class="btn btn-outline btn-sm"
+              style="display: none"
+            >
+              Install App
+            </button>
+            <span id="connection-status">🟢 Online</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Application Modules -->
+    <script src="/js/utilities.js"></script>
+    <script src="/js/indexeddb.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/detail.js"></script>
+    <script src="/js/favorites.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/map.js"></script>
+    <script src="/js/planner.js"></script>
+    <script src="/js/grocery.js"></script>
+    <script src="/js/download.js"></script>
+    <script src="/js/speech.js"></script>
+    <script src="/js/timers.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/app.js"></script>
+
+    <script>
+      // Remove Splash Screen after load
+      window.addEventListener("load", () => {
+        const splash = document.getElementById("splash-screen");
+        setTimeout(() => {
+          splash.style.opacity = "0";
+          setTimeout(() => (splash.style.display = "none"), 500);
+        }, 1000);
+      });
+
+      // Connection Monitor
+      window.addEventListener(
+        "online",
+        () =>
+          (document.getElementById("connection-status").textContent =
+            "🟢 Online"),
+      );
+      window.addEventListener(
+        "offline",
+        () =>
+          (document.getElementById("connection-status").textContent =
+            "🔴 Offline"),
+      );
+    </script>
+  </body>
+</html>

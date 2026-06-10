@@ -1,0 +1,26 @@
+[
+  {
+    "id": "indian",
+    "name": "Indian",
+    "description": "Rich, spicy, and diverse culinary traditions from the Indian subcontinent.",
+    "popularDishes": ["Biryani", "Butter Chicken", "Masala Dosa"]
+  },
+  {
+    "id": "italian",
+    "name": "Italian",
+    "description": "World-famous for its simplicity and focus on high-quality ingredients.",
+    "popularDishes": ["Margherita Pizza", "Carbonara", "Lasagna"]
+  },
+  {
+    "id": "japanese",
+    "name": "Japanese",
+    "description": "Elegant presentation and delicate flavors with a focus on seasonality.",
+    "popularDishes": ["Sushi", "Ramen", "Okonomiyaki"]
+  },
+  {
+    "id": "mexican",
+    "name": "Mexican",
+    "description": "Spicy, vibrant, and heart-warming street food and traditional dishes.",
+    "popularDishes": ["Tacos al Pastor", "Enchiladas", "Guacamole"]
+  }
+]

@@ -1,0 +1,69 @@
+[
+  {
+    "id": 716429,
+    "title": "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+    "image": "https://spoonacular.com/recipeImages/716429-556x370.jpg",
+    "readyInMinutes": 45,
+    "servings": 2,
+    "healthScore": 19,
+    "nutrition": {
+      "nutrients": [{ "name": "Calories", "amount": 584, "unit": "kcal" }]
+    },
+    "dishTypes": ["lunch", "main course", "dinner"],
+    "extendedIngredients": [
+      { "id": 1001, "original": "1 tbsp butter" },
+      { "id": 11135, "original": "2 cups cauliflower florets" },
+      { "id": 1145, "original": "2 cloves garlic" }
+    ],
+    "analyzedInstructions": [
+      {
+        "steps": [
+          { "number": 1, "step": "Boil pasta in salted water." },
+          { "number": 2, "step": "Sauté cauliflower with garlic and butter." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 715538,
+    "title": "What to Purchase for a Basic Middle Eastern Pantry",
+    "image": "https://spoonacular.com/recipeImages/715538-556x370.jpg",
+    "readyInMinutes": 15,
+    "servings": 1,
+    "healthScore": 4,
+    "nutrition": {
+      "nutrients": [{ "name": "Calories", "amount": 250, "unit": "kcal" }]
+    },
+    "dishTypes": ["side dish"],
+    "extendedIngredients": [],
+    "analyzedInstructions": []
+  },
+  {
+    "id": 644387,
+    "title": "Garlic Ginger Chicken",
+    "image": "https://spoonacular.com/recipeImages/644387-556x370.jpg",
+    "readyInMinutes": 45,
+    "servings": 4,
+    "healthScore": 32,
+    "nutrition": {
+      "nutrients": [{ "name": "Calories", "amount": 450, "unit": "kcal" }]
+    },
+    "dishTypes": ["lunch", "main course", "dinner"],
+    "extendedIngredients": [],
+    "analyzedInstructions": []
+  },
+  {
+    "id": 715415,
+    "title": "Red Lentil Soup with Chicken and Vegetables",
+    "image": "https://spoonacular.com/recipeImages/715415-556x370.jpg",
+    "readyInMinutes": 55,
+    "servings": 6,
+    "healthScore": 73,
+    "nutrition": {
+      "nutrients": [{ "name": "Calories", "amount": 300, "unit": "kcal" }]
+    },
+    "dishTypes": ["soup", "lunch", "dinner"],
+    "extendedIngredients": [],
+    "analyzedInstructions": []
+  }
+]
