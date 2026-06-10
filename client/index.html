@@ -152,19 +152,16 @@
           "
         >
           <p>&copy; 2024 RecipeVerse. MCA Academic Project.</p>
-          <div style="display: flex; gap: 15px">
-            <button
-              id="install-btn"
-              class="btn btn-outline btn-sm"
-              style="display: none"
-            >
-              Install App
-            </button>
-            <span id="connection-status">🟢 Online</span>
-          </div>
+          <span id="connection-status">🟢 Online</span>
         </div>
       </footer>
     </div>
+
+    <!-- Floating PWA Install Prompt -->
+    <button id="install-btn" class="install-fab" aria-label="Install RecipeVerse app">
+      <span class="install-fab-icon" aria-hidden="true">⬇️</span>
+      <span class="install-fab-label">Install App</span>
+    </button>
 
     <!-- Application Modules -->
     <script src="/js/utilities.js"></script>

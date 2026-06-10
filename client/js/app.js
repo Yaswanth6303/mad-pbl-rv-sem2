@@ -23,17 +23,44 @@ const App = {
                 .catch(err => console.error('SW Failed', err));
         }
 
-        // PWA Install Prompt
+        // PWA Install — keep the FAB visible at all times so anyone can install.
+        // Three runtime states for the button:
+        //   1. Browser supports beforeinstallprompt (Chrome/Edge/Android) → click triggers native prompt.
+        //   2. Browser doesn't fire it (iOS Safari) → click shows OS-specific instructions.
+        //   3. App already running as installed PWA → hide the button (not useful in standalone mode).
+        const installBtn = document.getElementById('install-btn');
+        let deferredPrompt = null;
+
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+            || window.navigator.standalone === true;
+
+        if (installBtn) {
+            if (isStandalone) {
+                installBtn.hidden = true;
+            } else {
+                installBtn.hidden = false;
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        if (outcome === 'accepted') installBtn.hidden = true;
+                        deferredPrompt = null;
+                    } else {
+                        App.showInstallInstructions();
+                    }
+                });
+            }
+        }
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) {
-                installBtn.style.display = 'block';
-                installBtn.onclick = () => {
-                    e.prompt();
-                    installBtn.style.display = 'none';
-                };
-            }
+            deferredPrompt = e;
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            if (installBtn) installBtn.hidden = true;
+            Utils.showToast('RecipeVerse installed!', 'success');
         });
 
         // Online/Offline Status
@@ -232,6 +259,69 @@ const App = {
         } finally {
             App.hideLoader();
         }
+    },
+
+    showInstallInstructions: () => {
+        const ua = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        const isAndroid = /android/i.test(ua);
+        const isFirefox = /firefox/i.test(ua);
+
+        let title = 'Install RecipeVerse';
+        let body;
+        if (isIOS) {
+            body = `
+                <p>To install on iOS:</p>
+                <ol style="text-align:left; padding-left:20px;">
+                    <li>Tap the <strong>Share</strong> button <span aria-hidden="true">⬆️</span> in Safari</li>
+                    <li>Scroll and choose <strong>Add to Home Screen</strong></li>
+                    <li>Tap <strong>Add</strong> in the top-right</li>
+                </ol>
+            `;
+        } else if (isFirefox) {
+            body = `
+                <p>To install on Firefox:</p>
+                <ol style="text-align:left; padding-left:20px;">
+                    <li>Open the <strong>menu</strong> <span aria-hidden="true">☰</span></li>
+                    <li>Choose <strong>Install</strong> or <strong>Add to Home Screen</strong></li>
+                </ol>
+            `;
+        } else if (isAndroid) {
+            body = `
+                <p>To install on Android:</p>
+                <ol style="text-align:left; padding-left:20px;">
+                    <li>Open the browser <strong>menu</strong> <span aria-hidden="true">⋮</span></li>
+                    <li>Choose <strong>Install app</strong> or <strong>Add to Home Screen</strong></li>
+                </ol>
+            `;
+        } else {
+            body = `
+                <p>To install on desktop:</p>
+                <ol style="text-align:left; padding-left:20px;">
+                    <li>Click the <strong>install icon</strong> <span aria-hidden="true">⊕</span> in your browser's address bar</li>
+                    <li>Or open the browser menu and choose <strong>Install RecipeVerse</strong></li>
+                </ol>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:12px;">If you don't see those options, your browser may not support PWA installation yet.</p>
+            `;
+        }
+
+        const existing = document.getElementById('install-instructions-modal');
+        if (existing) existing.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'install-instructions-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal" style="max-width:440px;">
+                <h2 style="margin-bottom:16px;">${title}</h2>
+                <div style="color:var(--text-main); line-height:1.6;">${body}</div>
+                <button class="btn btn-primary" style="margin-top:20px; width:100%;" onclick="document.getElementById('install-instructions-modal').remove()">Got it</button>
+            </div>
+        `;
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+        document.body.appendChild(modal);
     },
 
     renderSkeletonLoaders: () => {
